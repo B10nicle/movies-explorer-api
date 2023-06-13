@@ -1,8 +1,8 @@
-const mongoose = require('mongoose');
-const { compare } = require('bcryptjs');
-const { Schema } = mongoose;
 const { UnauthorizedError } = require('../../error/UnauthorizedError');
 const { EMAIL_REGEX } = require('../../utils/regex');
+const { compare } = require('bcryptjs');
+const mongoose = require('mongoose');
+const { Schema } = mongoose;
 
 const userSchema = new Schema(
   {
