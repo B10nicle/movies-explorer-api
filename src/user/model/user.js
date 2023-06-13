@@ -5,7 +5,7 @@ const { Schema } = mongoose;
 
 const {
   UnauthorizedError,
-} = require('../utils/errors/UnauthorizedError');
+} = require('../../error/UnauthorizedError');
 
 const { EMAIL_REGEX } = require('../utils/validation');
 
