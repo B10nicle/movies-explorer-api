@@ -1,5 +1,5 @@
 {
-  "name": "Movies Explorer",
+  "name": "movies-explorer",
   "version": "0.0.1",
   "description": "Movies Explorer App",
   "main": "app.js",
