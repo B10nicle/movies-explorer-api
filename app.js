@@ -36,6 +36,7 @@ app.use((error, request, response, next) => {
 });
 
 async function start() {
+  mongoose.set('strictQuery', false);
   try {
     await mongoose.connect(MONGO_URL);
     await app.listen(PORT);
