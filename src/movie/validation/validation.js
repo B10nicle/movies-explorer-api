@@ -1,5 +1,5 @@
-import {celebrate, Joi} from "celebrate";
-import {URL_REGEX} from "../../utils/regex";
+import { celebrate, Joi } from 'celebrate';
+import { URL_REGEX } from '../../utils/regex';
 
 const createMovieValidation = celebrate({
   body: Joi.object().keys({

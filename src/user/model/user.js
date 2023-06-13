@@ -1,38 +1,33 @@
 const mongoose = require('mongoose');
 const { compare } = require('bcryptjs');
-
 const { Schema } = mongoose;
-
-const {
-  UnauthorizedError,
-} = require('../../error/UnauthorizedError');
-
-const { EMAIL_REGEX } = require('../utils/validation');
+const { UnauthorizedError } = require('../../error/UnauthorizedError');
+const { EMAIL_REGEX } = require('../../utils/regex');
 
 const userSchema = new Schema(
   {
-    email: {
-      type: String,
+    name: {
       required: true,
-      unique: true,
+      type: String,
       validate: {
-        validator: (email) => EMAIL_REGEX.test(email),
-        message: 'Требуется ввести электронный адрес',
+        validator: ({length}) => length >= 2 && length <= 30,
+        message: 'Длина имени пользователя от 2 до 30 символов',
       },
     },
 
     password: {
-      type: String,
       required: true,
+      type: String,
       select: false,
     },
 
-    name: {
-      type: String,
+    email: {
       required: true,
+      type: String,
+      unique: true,
       validate: {
-        validator: ({ length }) => length >= 2 && length <= 30,
-        message: 'Имя пользователя должно быть длиной от 2 до 30 символов',
+        validator: email => EMAIL_REGEX.test(email),
+        message: 'Введите электронную почту',
       },
     },
   },
@@ -41,21 +36,18 @@ const userSchema = new Schema(
     statics: {
       findUserByCredentials(email, password) {
         return (
-          this
-            .findOne({ email })
+          this.findOne({email})
             .select('+password')
         )
-          .then((user) => {
+          .then(user => {
             if (user) {
               return compare(password, user.password)
-                .then((matched) => {
+                .then(matched => {
                   if (matched) return user;
-
-                  return Promise.reject(new UnauthorizedError('Неверная почта или пароль'));
+                  return Promise.reject(new UnauthorizedError('Неверно указана почта или пароль'));
                 });
             }
-
-            return Promise.reject(new UnauthorizedError('Неверная почта или пароль'));
+            return Promise.reject(new UnauthorizedError('Неверно указана почта или пароль'));
           });
       },
     },
