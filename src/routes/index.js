@@ -1,6 +1,6 @@
+const router = require('express').Router();
 const NOT_FOUND_ERROR = require('../error/NotFoundError');
 const auth = require('../middlewares/auth');
-const router = require('express').Router();
 const routeSignup = require('./signup');
 const routeSignin = require('./signin');
 const routeMovies = require('./movies');

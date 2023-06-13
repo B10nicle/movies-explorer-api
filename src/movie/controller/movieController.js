@@ -13,7 +13,7 @@ function getMovies(req, res, next) {
       if (movies) return res.send(movies);
       throw new NOT_FOUND_ERROR('Данные не найдены');
     })
-    .catch(err => {
+    .catch((err) => {
       if (err.name === 'CastError') next(new BAD_REQUEST_ERROR('Передан некорректный id пользователя'));
       else next(err);
     });
@@ -51,7 +51,7 @@ function createMovie(req, res, next) {
       movieId,
     })
     .then(() => res.status(201).send({ message: 'Фильм добавлен' }))
-    .catch(err => {
+    .catch((err) => {
       if (err.name === 'ValidationError') next(new BAD_REQUEST_ERROR('Неккоректные данные'));
       else next(err);
     });

@@ -1,5 +1,5 @@
-import { celebrate, Joi } from "celebrate";
-import { EMAIL_REGEX, PASSWORD_REGEX } from "../../utils/regex";
+const { Joi, celebrate } = require('celebrate');
+const { EMAIL_REGEX, PASSWORD_REGEX } = require('../../utils/regex');
 
 const createValidation = celebrate({
   body: Joi.object().keys({

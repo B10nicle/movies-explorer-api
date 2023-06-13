@@ -1,3 +1,5 @@
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 const UNAUTHORIZED_ERROR = require('../../error/UnauthorizedError');
 const BAD_REQUEST_ERROR = require('../../error/BadRequestError');
 const { NODE_ENV, JWT_SECRET } = require('../../utils/config');
@@ -5,8 +7,6 @@ const NOT_FOUND_ERROR = require('../../error/NotFoundError');
 const CONFLICT_ERROR = require('../../error/ConflictError');
 const { PASSWORD_REGEX } = require('../../utils/regex');
 const User = require('../model/user');
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
 
 function login(req, res, next) {
   const { email, password } = req.body;
@@ -35,10 +35,10 @@ function createUser(req, res, next) {
   if (!PASSWORD_REGEX.test(password)) throw new BAD_REQUEST_ERROR('Пароль не соответствует регексу');
 
   bcrypt.hash(password, 10)
-    .then(hash => User.create({
+    .then((hash) => User.create({
       name,
       email,
-      password: hash
+      password: hash,
     }))
     .then(() => res.status(201).send({ message: 'Пользователь зарегистрирован' }))
     .catch((err) => {
@@ -57,7 +57,7 @@ function getUserInfo(req, res, next) {
       if (user) return res.send(user);
       throw new NOT_FOUND_ERROR('Пользователь не найден');
     })
-    .catch(err => {
+    .catch((err) => {
       if (err.name === 'CastError') next(new BAD_REQUEST_ERROR('Некорректный ID'));
       else next(err);
     });
@@ -96,5 +96,5 @@ module.exports = {
   updateUserInfo,
   getUserInfo,
   createUser,
-  login
+  login,
 };

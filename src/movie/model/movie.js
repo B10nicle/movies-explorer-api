@@ -1,5 +1,6 @@
-const { URL_REGEX } = require('../validation/validation');
 const mongoose = require('mongoose');
+const { URL_REGEX } = require('../validation/validation');
+
 const { Schema } = mongoose;
 const { ObjectId } = Schema.Types;
 
@@ -34,7 +35,7 @@ const movieSchema = new Schema(
       required: true,
       type: String,
       validate: {
-        validator: url => URL_REGEX.test(url),
+        validator: (url) => URL_REGEX.test(url),
         message: 'Введите URL',
       },
     },
@@ -43,7 +44,7 @@ const movieSchema = new Schema(
       required: true,
       type: String,
       validate: {
-        validator: url => URL_REGEX.test(url),
+        validator: (url) => URL_REGEX.test(url),
         message: 'Введите URL',
       },
     },
@@ -52,7 +53,7 @@ const movieSchema = new Schema(
       type: String,
       required: true,
       validate: {
-        validator: url => URL_REGEX.test(url),
+        validator: (url) => URL_REGEX.test(url),
         message: 'Введите URL',
       },
     },
