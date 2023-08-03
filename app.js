@@ -10,9 +10,23 @@ const router = require('./src/routes/index');
 
 const { PORT = 3000 } = process.env;
 
+const allowedCors = [
+  'https://project.nomoredomains.rocks/',
+  'http://project.nomoredomains.rocks/',
+  'localhost:3000',
+  'http://localhost:3001',
+  'http://localhost:3000',
+];
+
+const corsOptions = {
+  origin: allowedCors,
+  optionsSuccessStatus: 200,
+  credentials: true,
+};
+
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(helmet());
 
 app.use(requestLogger);
