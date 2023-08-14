@@ -1,11 +1,10 @@
 const { Joi, celebrate } = require('celebrate');
-const { URL_REGEX } = require('../../utils/regex');
 
 const createMovieValidation = celebrate({
   body: Joi.object().keys({
-    thumbnail: Joi.string().required().pattern(URL_REGEX),
-    trailerLink: Joi.string().required().pattern(URL_REGEX),
-    image: Joi.string().required().pattern(URL_REGEX),
+    thumbnail: Joi.string().required(),
+    trailerLink: Joi.string().required(),
+    image: Joi.string().required(),
     description: Joi.string().required(),
     director: Joi.string().required(),
     duration: Joi.number().required(),
