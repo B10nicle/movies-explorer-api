@@ -28,7 +28,7 @@ function createMovie(req, res, next) {
     year,
     description,
     image,
-    trailer,
+    trailerLink,
     nameRU,
     nameEN,
     thumbnail,
@@ -43,7 +43,7 @@ function createMovie(req, res, next) {
       year,
       description,
       image,
-      trailer,
+      trailerLink,
       thumbnail,
       nameRU,
       nameEN,
@@ -52,7 +52,7 @@ function createMovie(req, res, next) {
     })
     .then(() => res.status(201).send({ message: 'Фильм добавлен' }))
     .catch((err) => {
-      if (err.name === 'ValidationError') next(new BAD_REQUEST_ERROR('Неккоректные данные'));
+      if (err.name === 'ValidationError') next(new BAD_REQUEST_ERROR('Некорректные данные'));
       else next(err);
     });
 }

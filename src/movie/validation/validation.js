@@ -4,7 +4,7 @@ const { URL_REGEX } = require('../../utils/regex');
 const createMovieValidation = celebrate({
   body: Joi.object().keys({
     thumbnail: Joi.string().required().pattern(URL_REGEX),
-    trailer: Joi.string().required().pattern(URL_REGEX),
+    trailerLink: Joi.string().required().pattern(URL_REGEX),
     image: Joi.string().required().pattern(URL_REGEX),
     description: Joi.string().required(),
     director: Joi.string().required(),

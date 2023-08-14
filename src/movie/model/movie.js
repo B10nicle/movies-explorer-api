@@ -40,7 +40,7 @@ const movieSchema = new Schema(
       },
     },
 
-    trailer: {
+    trailerLink: {
       required: true,
       type: String,
       validate: {
